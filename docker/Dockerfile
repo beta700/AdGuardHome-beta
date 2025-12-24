@@ -1,7 +1,8 @@
+
 FROM adguard/adguardhome:latest
 
-# إجبار واجهة التحكم والويب على المنفذ 3000 المتوافق مع Render
-EXPOSE 3000
+# فتح المنفذ 10000 الذي تستخدمه Render مجاناً
+EXPOSE 10000
 
-# تشغيل التطبيق مع تحديد المنفذ 3000 مباشرة في الأمر
-CMD ["/opt/adguardhome/AdGuardHome", "--web-addr", "0.0.0.0:3000", "--no-check-update"]
+# تشغيل AdGuard وإجباره على استخدام المنفذ 10000 بدلاً من 80 المعطل
+CMD ["/opt/adguardhome/AdGuardHome", "--web-addr", "0.0.0.0:10000", "--no-check-update"]
