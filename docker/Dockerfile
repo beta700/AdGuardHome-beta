@@ -1,15 +1,9 @@
-# استخدام الصورة الجاهزة مباشرة بدلاً من محاولة بنائها من الصفر
+# استخدام الصورة الجاهزة مباشرة لتجنب أخطاء بناء كود Go
 FROM adguard/adguardhome:latest
 
-# فتح المنافذ الضرورية لـ Render
-# المنفذ 853 ضروري جداً ليعمل الـ Private DNS في أندرويد
-EXPOSE 53/tcp 53/udp 80/tcp 443/tcp 853/tcp 853/udp 3000/tcp
+# فتح المنافذ المطلوبة
+EXPOSE 3000 80 443 853 53/udp 53/tcp
 
-# تشغيل التطبيق مع ضبط مسارات العمل الافتراضية
+# تشغيل البرنامج
 ENTRYPOINT ["/opt/adguardhome/AdGuardHome"]
-CMD [ \
-        "--no-check-update", \
-        "-c", "/opt/adguardhome/conf/AdGuardHome.yaml", \
-        "-w", "/opt/adguardhome/work", \
-        "--host", "0.0.0.0" \
-]
+CMD ["--web-addr", "0.0.0.0:3000", "--no-check-update"]
