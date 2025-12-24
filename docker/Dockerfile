@@ -1,9 +1,7 @@
-# استخدام الصورة الجاهزة مباشرة لتجنب أخطاء بناء كود Go
 FROM adguard/adguardhome:latest
 
-# فتح المنافذ المطلوبة
-EXPOSE 3000 80 443 853 53/udp 53/tcp
+# إجبار واجهة التحكم والويب على المنفذ 3000 المتوافق مع Render
+EXPOSE 3000
 
-# تشغيل البرنامج
-ENTRYPOINT ["/opt/adguardhome/AdGuardHome"]
-CMD ["--web-addr", "0.0.0.0:3000", "--no-check-update"]
+# تشغيل التطبيق مع تحديد المنفذ 3000 مباشرة في الأمر
+CMD ["/opt/adguardhome/AdGuardHome", "--web-addr", "0.0.0.0:3000", "--no-check-update"]
